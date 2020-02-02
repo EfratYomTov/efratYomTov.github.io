@@ -15,8 +15,8 @@ namespace Twitter.App
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}",
+                defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

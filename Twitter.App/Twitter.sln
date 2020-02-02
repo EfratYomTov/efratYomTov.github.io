@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.App", "Twitter.App\Twitter.App.csproj", "{34C5E241-DA1A-49B4-B5EE-058236E6D993}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.BL", "Twitter.BL\Twitter.BL.csproj", "{1988A2D5-F0E2-4E7B-8C8A-7163D2DE816A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.Dal", "Twitter.Dal\Twitter.Dal.csproj", "{152FBE6D-A6C2-49BE-A1F6-349F675D2915}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.App", "Twitter.App\Twitter.App.csproj", "{8092C30D-FEC2-4FA0-BE21-46C0379E03D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{34C5E241-DA1A-49B4-B5EE-058236E6D993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34C5E241-DA1A-49B4-B5EE-058236E6D993}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34C5E241-DA1A-49B4-B5EE-058236E6D993}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34C5E241-DA1A-49B4-B5EE-058236E6D993}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1988A2D5-F0E2-4E7B-8C8A-7163D2DE816A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1988A2D5-F0E2-4E7B-8C8A-7163D2DE816A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1988A2D5-F0E2-4E7B-8C8A-7163D2DE816A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{152FBE6D-A6C2-49BE-A1F6-349F675D2915}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{152FBE6D-A6C2-49BE-A1F6-349F675D2915}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{152FBE6D-A6C2-49BE-A1F6-349F675D2915}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8092C30D-FEC2-4FA0-BE21-46C0379E03D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8092C30D-FEC2-4FA0-BE21-46C0379E03D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8092C30D-FEC2-4FA0-BE21-46C0379E03D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8092C30D-FEC2-4FA0-BE21-46C0379E03D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

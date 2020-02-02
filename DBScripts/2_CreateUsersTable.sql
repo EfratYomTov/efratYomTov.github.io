@@ -1,0 +1,28 @@
+﻿USE [Twitter]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF EXISTS  (SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Users') 
+	DROP TABLE [dbo].[Users];
+
+
+GO
+CREATE TABLE [dbo].[Users] (
+    [ID]          INT            IDENTITY (1, 1) NOT NULL,
+    [FirstName]   NVARCHAR (50)  NOT NULL,
+    [LastName]    NVARCHAR (50)  NOT NULL,
+    [Email]       NVARCHAR (100) NOT NULL,
+    [Password]    NVARCHAR (10)  NOT NULL,
+    [CreatedDate] DATE           NOT NULL DEFAULT GETDATE()  
+
+	CONSTRAINT PK_Users_ID PRIMARY KEY (ID),
+
+	CONSTRAINT UC_Users_Email UNIQUE(Email)
+);
+
+
