@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Twitter.Dal.Services.Interfaces;
 
 namespace Twitter.Dal.Services
@@ -38,6 +39,16 @@ namespace Twitter.Dal.Services
                 user.Password = password;
 
                 context.SaveChanges();
+                return user;
+            }
+        }
+
+        public Users GetUser(string emaill, string password)
+        {
+            using (var context = new TwitterContext())
+            {
+                var user = context.Users.SingleOrDefault(x=> x.Email == emaill && x.Password == password);
+
                 return user;
             }
         }
@@ -120,5 +131,7 @@ namespace Twitter.Dal.Services
                 return users;
             }
         }
+
+    
     }
 }

@@ -6,6 +6,8 @@
 
         Users EditUser(int userID, string firstName, string lastName, string password);
 
+        Users GetUser(string emaill, string password);
+
         Users[] GetUsers(string firstName);
 
         void Follow(int userID, int userFollowedID);
