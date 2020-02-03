@@ -1,10 +1,12 @@
-﻿app.controller('loginCtrl', function ($scope, loginService) {
-    $scope.user = null;
-    $scope.email = null;
-    $scope.password = null;
+﻿app.controller('loginCtrl',  ['$scope','loginService', function($scope, loginService) {
 
-
+    $scope.user = {
+        email: 'sdsd',
+        password:null
+    };
+   
     $scope.login = function () {
+        debugger;
         var def = $q.defer();
 
         loginService.validateLogin($scope.email, $scope.password).then(
@@ -20,4 +22,4 @@
         return def.promise;
     }
 
-});
+}]);

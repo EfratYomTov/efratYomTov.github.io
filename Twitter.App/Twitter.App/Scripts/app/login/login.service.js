@@ -3,8 +3,9 @@
     this.validateLogin = function (email, password) {
         var def = $q.defer();
 
-        $http.get('/Twitter/GetUser', { params: { email: email, password: password } }).then(
+        $http.get('/api/twitter/testGet', { params: { email: email, password: password } }).then(
             function (response) {
+                debugger;
                 var data = JSON.parse(response.data);
                 console.dir(data);
                 def.resolve(data);

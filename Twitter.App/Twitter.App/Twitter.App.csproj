@@ -206,13 +206,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\createAccount\createAccount.controller.js" />
+    <Content Include="Scripts\app\createAccount\createAccount.directive.js" />
+    <Content Include="Scripts\app\createAccount\createAccount.service.js" />
+    <Content Include="Scripts\app\createAccount\createAccount.template.html" />
     <Content Include="Scripts\app\login\login.controller.js" />
     <Content Include="Scripts\app\login\login.directive.js" />
     <Content Include="Scripts\app\login\login.service.js" />
     <Content Include="Scripts\app\login\login.template.html" />
-    <Content Include="Scripts\app\_mainApp\2_app.controller.js" />
-    <Content Include="Scripts\app\_mainApp\1_app.js" />
-    <Content Include="Scripts\app\_mainApp\3_app.config.js" />
+    <Content Include="Scripts\app\1_app\2_app.controller.js" />
+    <Content Include="Scripts\app\1_app\1_app.js" />
+    <Content Include="Scripts\app\1_app\3_app.config.js" />
     <Content Include="Scripts\sources\angular\1.7.9\angular-loader.js" />
     <Content Include="Scripts\sources\angular\1.7.9\angular-route.js" />
     <Content Include="Scripts\sources\angular\1.7.9\angular.js" />
@@ -243,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\app\createAccount\" />
     <Folder Include="Scripts\app\tweet\" />
     <Folder Include="Scripts\app\userDetails\" />
   </ItemGroup>

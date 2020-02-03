@@ -16,6 +16,20 @@ namespace Twitter.App.ApiControllers
         }
 
 
+        [Route("api/twitter/testGet")]
+        [HttpGet]
+        public string testGet(string email, string password)
+        {
+            return ToJson(new { IsSucceeded = true });
+        }
+
+        [Route("api/twitter/testpost")]
+        [HttpPost]
+        public string testpost([FromBody]LoginModel request)
+        {
+            return ToJson(new { IsSucceeded = true });
+        }
+
         [Route("api/twitter/login")]
         [HttpPost]
         public string Login([FromBody]LoginModel request)
@@ -106,7 +120,8 @@ namespace Twitter.App.ApiControllers
 
         #region Private
 
-        private string ToJson(object value) {
+        private string ToJson(object value)
+        {
 
             return JsonConvert.SerializeObject(value);
         }

@@ -1,6 +1,6 @@
 ﻿app.directive("login", function () {
     return {
         restrict: 'E',
-        templateUrl: 'login/login.template.html'
+        templateUrl: './Scripts/app/login/login.template.html'
     };
 });

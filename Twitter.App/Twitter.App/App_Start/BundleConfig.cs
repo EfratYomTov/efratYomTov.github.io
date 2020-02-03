@@ -22,12 +22,13 @@ namespace Twitter.App
                       "~/Scripts/sources/bootstrap/bootstrap.js",
                       "~/Scripts/sources/bootstrap/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular").IncludeDirectory(
-                "~/Scripts/sources/angular/1.7.9", "*.js", true));
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                 "~/Scripts/sources/angular/1.7.9/angular.js",
+                 "~/Scripts/sources/angular/1.7.9/angular-route.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/angular/app")
                 .IncludeDirectory("~/Scripts/app", "*.js", true)
-                .IncludeDirectory("~/Scripts/app", "*.html", true)
                 .IncludeDirectory("~/Scripts/app", "*.css", true));
 
 
