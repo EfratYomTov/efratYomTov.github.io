@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using Newtonsoft.Json;
 using System.Web.Http;
+using Twitter.App.Models;
+using Twitter.BL.Services;
+using Twitter.BL.Services.Interfaces;
 
 namespace Twitter.App.ApiControllers
 {
-    [RoutePrefix("api/Twitter")]
     public class TwitterApiController : ApiController
     {
         private ITwitterBlService twitterBlService;
@@ -18,16 +16,17 @@ namespace Twitter.App.ApiControllers
         }
 
 
-        // POST api/Twitter/Login
-        [Route("Login")]
-        public IHttpActionResult Login()
+        [Route("api/twitter/login")]
+        [HttpPost]
+        public string Login([FromBody]LoginModel request)
         {
-            //Do somesing
-            return Ok();
+            var accountResponse = twitterBlService.Login(request.Email, request.Password);
+
+            return ToJson(accountResponse);
         }
 
-        // POST api/Twitter/Logout
-        [Route("Logout")]
+
+        [Route("api/twitter/logout")]
         public IHttpActionResult Logout()
         {
             //Do somesing
@@ -36,102 +35,80 @@ namespace Twitter.App.ApiControllers
 
 
 
-        // POST api/Twitter/CreateAccount
-        // [AllowAnonymous]
-        [Route("CreateAccount")]
-        public async Task<IHttpActionResult> CreateAccount(RegisterBindingModel model)
+        [HttpPost]
+        [Route("api/twitter/createAccount")]
+        public string CreateAccount([FromBody]CreateAccountModel request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var accountResponse = twitterBlService.CreateAccount(request.FirstName, request.LastName, request.Email, request.Password);
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-            IdentityResult result = await twitterBlService.CreateAccount(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
-
+            return ToJson(accountResponse);
         }
 
-        // POST api/Twitter/EditAccount
-        [Route("EditAccount")]
-        public async Task<IHttpActionResult> EditAccount()
+        [HttpPost]
+        [Route("api/twitter/editAccount")]
+        public string EditAccount([FromBody]EditAccountModel request)
         {
-            
-            return Ok();
+            var accountResponse = twitterBlService.EditAccount(request.UserID, request.FirstName, request.LastName, request.Password);
+
+            return ToJson(accountResponse);
         }
 
-        // GET api/Twitter/GetUsers
-        [Route("GetUsers")]
-        public Users[] GetUsers(string firstName)
+        [HttpGet]
+        [Route("api/twitter/getUsers")]
+        public string GetUsers(string firstName)
         {
+            var users = twitterBlService.GetUsers(firstName);
 
-            return Ok();
+            return ToJson(users);
         }
 
-        // POST api/Twitter/Follow
-        [Route("Follow")]
-        public IHttpActionResult Follow(int userID, int userFollowedID);
-
-        // POST api/Twitter/UnFollow
-        [Route("UnFollow")]
-        public IHttpActionResult UnFollow(int userID, int userUnFollowedID);
-
-        // POST api/Twitter/AddTweet
-        [Route("AddTweet")]
-        public IHttpActionResult AddTweet(int userID, string content);
-
-        // GET api/Twitter/GetFollowedUsersTweets
-        [Route("GetFollowedUsersTweets")]
-        public Tweets[] GetFollowedUsersTweets(int userID)
+        [HttpPost]
+        [Route("api/twitter/follow")]
+        public string Follow([FromBody]FollowModel request)
         {
+            var response = twitterBlService.Follow(request.UserID, request.UserFollowedID);
 
-            return Ok();
+            return ToJson(response);
         }
 
-        // GET api/Twitter/GetOwnTweets
-        [Route("GetOwnTweets")]
-        public Tweets[] GetOwnTweets(int userID)
+        [HttpPost]
+        [Route("api/twitter/unFollow")]
+        public string UnFollow([FromBody]UnFollowModel request)
         {
+            var response = twitterBlService.UnFollow(request.UserID, request.UserUnFollowedID);
 
-            return Ok();
+            return ToJson(response);
+        }
+
+        [HttpPost]
+        [Route("api/twitter/addTweet")]
+        public string AddTweet([FromBody]TweetModel request)
+        {
+            var tweet = twitterBlService.AddTweet(request.UserID, request.Content);
+            return ToJson(tweet);
+        }
+
+        [HttpGet]
+        [Route("api/twitter/getFollowedUsersTweets")]
+        public string GetFollowedUsersTweets(int userID)
+        {
+            var tweets = twitterBlService.GetFollowedUsersTweets(userID);
+            return ToJson(tweets);
+        }
+
+        [HttpGet]
+        [Route("api/twitter/getOwnTweets")]
+        public string GetOwnTweets(int userID)
+        {
+            var tweets = twitterBlService.GetOwnTweets(userID);
+            return ToJson(tweets);
         }
 
         #region Private
 
-        private IHttpActionResult GetErrorResult(IdentityResult result)
-        {
-            if (result == null)
-            {
-                return InternalServerError();
-            }
+        private string ToJson(object value) {
 
-            if (!result.Succeeded)
-            {
-                if (result.Errors != null)
-                {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
-            }
-
-            return null;
+            return JsonConvert.SerializeObject(value);
         }
 
         #endregion Private

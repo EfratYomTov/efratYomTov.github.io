@@ -4,9 +4,9 @@ using Twitter.Dal.Services.Interfaces;
 
 namespace Twitter.Dal.Services
 {
-    public class TwitterDataService: ITwitterDataService
+    public class TwitterDataService : ITwitterDataService
     {
-        public Users CreateUser(string firstName, string lastName, string emaill, string password)
+        public Users CreateUser(string firstName, string lastName, string email, string password)
         {
             using (var context = new TwitterContext())
             {
@@ -14,8 +14,9 @@ namespace Twitter.Dal.Services
                 {
                     FirstName = firstName,
                     LastName = lastName,
-                    Email = emaill,
-                    Password = password
+                    Email = email,
+                    Password = password,
+                    CreatedDate = DateTime.Now
                 };
 
                 user = context.Users.Add(user);
@@ -34,20 +35,20 @@ namespace Twitter.Dal.Services
                 if (user == null)
                     return null;
 
-                user.FirstName = firstName;
-                user.LastName = lastName;
-                user.Password = password;
+                user.FirstName = firstName ?? user.FirstName;
+                user.LastName = lastName ?? user.LastName;
+                user.Password = password ?? user.Password;
 
                 context.SaveChanges();
                 return user;
             }
         }
 
-        public Users GetUser(string emaill, string password)
+        public Users GetUser(string email, string password)
         {
             using (var context = new TwitterContext())
             {
-                var user = context.Users.SingleOrDefault(x=> x.Email == emaill && x.Password == password);
+                var user = context.Users.SingleOrDefault(x => x.Email == email && x.Password == password);
 
                 return user;
             }
@@ -60,7 +61,7 @@ namespace Twitter.Dal.Services
                 var userFollowed = new UserFollowed
                 {
                     UserID = userID,
-                    UserFollowedID = userFollowedID
+                    UserFollowedID = userFollowedID,
                 };
 
                 context.UserFollowed.Add(userFollowed);
@@ -88,7 +89,8 @@ namespace Twitter.Dal.Services
                 var tweet = new Tweets
                 {
                     UserID = userID,
-                    Content = content
+                    Content = content,
+                    DateAdded = DateTime.Now
                 };
 
                 tweet = context.Tweets.Add(tweet);
@@ -132,6 +134,6 @@ namespace Twitter.Dal.Services
             }
         }
 
-    
+
     }
 }

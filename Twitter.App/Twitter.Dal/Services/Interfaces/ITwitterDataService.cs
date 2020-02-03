@@ -2,11 +2,11 @@
 {
     public interface ITwitterDataService
     {
-        Users CreateUser(string firstName, string lastName, string emaill, string password);
+        Users CreateUser(string firstName, string lastName, string email, string password);
 
         Users EditUser(int userID, string firstName, string lastName, string password);
 
-        Users GetUser(string emaill, string password);
+        Users GetUser(string email, string password);
 
         Users[] GetUsers(string firstName);
 
