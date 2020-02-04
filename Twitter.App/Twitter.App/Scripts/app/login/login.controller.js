@@ -1,22 +1,32 @@
-﻿app.controller('loginCtrl',  ['$scope','loginService', function($scope, loginService) {
+﻿app.controller('loginCtrl', ['$scope', 'loginService','$q',  function ($scope, loginService, $q) {
 
     $scope.user = {
-        email: 'sdsd',
+        email: null,
         password:null
     };
    
     $scope.login = function () {
         debugger;
+        $scope.showLoading = true;
         var def = $q.defer();
 
-        loginService.validateLogin($scope.email, $scope.password).then(
+        loginService.validateLogin($scope.user).then(
             function (data) {
-                console.dir(data);
-                $scope.user = data[0];
+
+                if (data && data.isSucceeded) {
+                    $scope.user = data.user;
+                    //Go to user details
+                }
+                else
+                    console.log("login failed, email or password is invalid");
+
+                $scope.showLoading = false;
                 def.resolve($scope.user);
+
             }, function (error) {
                 console.log(error);
                 def.reject(error);
+                $scope.showLoading = false;
             });
 
         return def.promise;
