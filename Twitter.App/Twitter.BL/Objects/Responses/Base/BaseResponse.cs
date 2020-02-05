@@ -1,18 +1,20 @@
-﻿namespace Twitter.BL.Objects.Responses.Base
+﻿using Twitter.BL.Interfaces;
+
+namespace Twitter.BL.Objects.Responses.Base
 {
-    public class BaseResponse
+    public class BaseResponse : IResponse
     {
         public bool IsSucceeded { get; set; }
 
 
-        internal static AccountResponse Error()
+        internal static IResponse Error()
         {
-            return new AccountResponse { IsSucceeded = false };
+            return new BaseResponse { IsSucceeded = false };
         }
 
-        internal static AccountResponse Success()
+        internal static IResponse Success()
         {
-            return new AccountResponse { IsSucceeded = true};
+            return new BaseResponse { IsSucceeded = true};
         }
 
 

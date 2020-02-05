@@ -1,27 +1,25 @@
-﻿using Twitter.BL.Objects;
-using Twitter.BL.Objects.Responses;
-using Twitter.BL.Objects.Responses.Base;
+﻿using Twitter.BL.Interfaces;
 
 namespace Twitter.BL.Services.Interfaces
 {
     public interface ITwitterBlService
     {
-        AccountResponse Login(string email, string password);
+        IResponse Login(string email, string password);
 
-        AccountResponse CreateAccount(string firstName, string lastName, string email, string password);
+        IResponse CreateAccount(string firstName, string lastName, string email, string password);
 
-        AccountResponse EditAccount(int userID, string firstName, string lastName, string password);
+        IResponse EditAccount(int userID, string firstName, string lastName, string password);
 
-        User[] GetUsers(string firstName);
+        IResponse GetUsers(string firstName);
 
-        BaseResponse Follow(int userID, int userFollowedID);
+        IResponse Follow(int userID, int userFollowedID);
 
-        BaseResponse UnFollow(int userID, int userUnFollowedID);
+        IResponse UnFollow(int userID, int userUnFollowedID);
 
-        Tweet[] GetFollowedUsersTweets(int userID);
+        IResponse GetFollowedUsersTweets(int userID);
 
-        Tweet AddTweet(int userID, string content);
+        IResponse AddTweet(int userID, string content);
 
-        Tweet[] GetOwnTweets(int userID);
+        IResponse GetOwnTweets(int userID);
     }
 }

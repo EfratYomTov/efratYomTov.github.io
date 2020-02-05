@@ -8,11 +8,6 @@ namespace Twitter.BL.Objects.Responses
 
 
 
-        internal static new AccountResponse Error()
-        {
-            return new AccountResponse { IsSucceeded = false };
-        }
-
         internal static AccountResponse Success(User user)
         {
             return new AccountResponse { IsSucceeded = true, User = user };

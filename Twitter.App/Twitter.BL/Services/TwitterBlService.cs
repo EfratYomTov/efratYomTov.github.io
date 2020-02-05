@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Twitter.BL.Helpers;
+using Twitter.BL.Interfaces;
 using Twitter.BL.Objects;
 using Twitter.BL.Objects.Responses;
 using Twitter.BL.Objects.Responses.Base;
@@ -18,44 +20,75 @@ namespace Twitter.BL.Services
             twitterDataService = new TwitterDataService();
         }
 
-        public AccountResponse Login(string email, string password)
+        public IResponse Login(string email, string password)
         {
-            var user = twitterDataService.GetUser(email, password);
-            if (user == null)
-                return AccountResponse.Error();
+            try
+            {
+                var user = twitterDataService.GetUser(email, password);
+                if (user == null)
+                    return BaseResponse.Error();
 
-            var convertedUser = ConversionHelper.ConvertUser(user);
-            return AccountResponse.Success(convertedUser);
+                var convertedUser = ConversionHelper.ConvertUser(user);
+                return AccountResponse.Success(convertedUser);
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
         }
 
-        public AccountResponse CreateAccount(string firstName, string lastName, string email, string password)
+        public IResponse CreateAccount(string firstName, string lastName, string email, string password)
         {
-            var user = twitterDataService.CreateUser(firstName, lastName, email, password);
-            if (user == null)
-                return AccountResponse.Error();
+            try
+            {
+                var user = twitterDataService.CreateUser(firstName, lastName, email, password);
+                if (user == null)
+                    return BaseResponse.Error();
 
-            var convertedUser = ConversionHelper.ConvertUser(user);
-            return AccountResponse.Success(convertedUser);
+                var convertedUser = ConversionHelper.ConvertUser(user);
+                return AccountResponse.Success(convertedUser);
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
         }
 
-        public AccountResponse EditAccount(int userID, string firstName, string lastName, string password)
+        public IResponse EditAccount(int userID, string firstName, string lastName, string password)
         {
-            var user = twitterDataService.EditUser(userID, firstName, lastName, password);
-            if (user == null)
-                return AccountResponse.Error();
+            try
+            {
+                var user = twitterDataService.EditUser(userID, firstName, lastName, password);
+                if (user == null)
+                    return BaseResponse.Error();
 
-            var convertedUser = ConversionHelper.ConvertUser(user);
-            return AccountResponse.Success(convertedUser);
+                var convertedUser = ConversionHelper.ConvertUser(user);
+                return AccountResponse.Success(convertedUser);
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
         }
 
-        public User[] GetUsers(string firstName)
+        public IResponse GetUsers(string firstName)
         {
-            var users = twitterDataService.GetUsers(firstName);
+            try
+            {
+                var users = twitterDataService.GetUsers(firstName);
 
-            return ConversionHelper.ConvertUsers(users);
+                var convertedUsers = ConversionHelper.ConvertUsers(users);
+
+                return UsersResponse.Success(convertedUsers);
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
+
         }
 
-        public BaseResponse Follow(int userID, int userFollowedID)
+        public IResponse Follow(int userID, int userFollowedID)
         {
             try
             {
@@ -70,7 +103,7 @@ namespace Twitter.BL.Services
 
         }
 
-        public BaseResponse UnFollow(int userID, int userUnFollowedID)
+        public IResponse UnFollow(int userID, int userUnFollowedID)
         {
             try
             {
@@ -84,25 +117,50 @@ namespace Twitter.BL.Services
             }
         }
 
-        public Tweet[] GetFollowedUsersTweets(int userID)
+        public IResponse GetFollowedUsersTweets(int userID)
         {
-            var tweets = twitterDataService.GetFollowedUsersTweets(userID);
+            try
+            {
+                var tweets = twitterDataService.GetFollowedUsersTweets(userID);
 
-            return ConversionHelper.ConvertTweets(tweets);
+                var convertedTweets = ConversionHelper.ConvertTweets(tweets).OrderByDescending(x => x.DateAdded).ToArray();
+
+                return TweetsResponse.Success(convertedTweets);
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
         }
 
-        public Tweet AddTweet(int userID, string content)
+        public IResponse AddTweet(int userID, string content)
         {
-            var tweet = twitterDataService.AddTweet(userID, content);
+            try
+            {
+                var tweet = twitterDataService.AddTweet(userID, content);
 
-            return ConversionHelper.ConvertTweet(tweet);
+                return BaseResponse.Success();
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
         }
 
-        public Tweet[] GetOwnTweets(int userID)
+        public IResponse GetOwnTweets(int userID)
         {
-            var tweets = twitterDataService.GetOwnTweets(userID);
+            try
+            {
+                var tweets = twitterDataService.GetOwnTweets(userID);
 
-            return ConversionHelper.ConvertTweets(tweets);
+                var convertedTweets = ConversionHelper.ConvertTweets(tweets).OrderByDescending(x=>x.DateAdded).ToArray();
+
+                return TweetsResponse.Success(convertedTweets);
+            }
+            catch (Exception)
+            {
+                return BaseResponse.Error();
+            }
         }
     }
 }

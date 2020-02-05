@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ConversionHelper.cs" />
+    <Compile Include="Interfaces\IResponse.cs" />
     <Compile Include="Objects\Responses\Base\BaseResponse.cs" />
     <Compile Include="Objects\Responses\AccountResponse.cs" />
+    <Compile Include="Objects\Responses\TweetsResponse.cs" />
+    <Compile Include="Objects\Responses\UsersResponse.cs" />
     <Compile Include="Objects\Tweet.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,9 +58,7 @@
       <Name>Twitter.Dal</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
