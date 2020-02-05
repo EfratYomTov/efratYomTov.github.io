@@ -8,9 +8,9 @@ namespace Twitter.BL.Helpers
     internal static class ConversionHelper
     {
         /// <summary>
-        /// Convert user from type Twitter.Dal.Users to Twitter.BL.Objects.User
+        /// Convert user from type Twitter.Dal.UserModel to Twitter.BL.Objects.User
         /// </summary>
-        internal static User ConvertUser(Users user)
+        internal static User ConvertUser(UserModel user)
         {
             return new User
             {
@@ -19,14 +19,15 @@ namespace Twitter.BL.Helpers
                 LastName = user.LastName,
                 Email = user.Email,
                 Password = user.Password,
-                CreatedDate = user.CreatedDate
+                CreatedDate = user.CreatedDate,
+                IsFollowedByMe = user.IsFollowedByMe
             };
         }
 
         /// <summary>
-        /// Convert users array from type Twitter.Dal.Users to Twitter.BL.Objects.User
+        /// Convert users array from type Twitter.Dal.UserModel to Twitter.BL.Objects.User
         /// </summary>
-        internal static User[] ConvertUsers(Users[] users)
+        internal static User[] ConvertUsers(UserModel[] users)
         {
             var convertedUsers = new List<User>();
 

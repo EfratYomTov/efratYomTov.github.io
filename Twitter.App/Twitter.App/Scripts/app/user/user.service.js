@@ -15,8 +15,23 @@
            });
 
         return def.promise;
+    }
 
+    this.unfollow = function (userId, userUnFollowedID) {
+        var def = $q.defer();
+        var request = { userId: userId, userUnFollowedID: userUnFollowedID };
 
+        $http.post('/api/twitter/unfollow', request).then(
+            function (response) {
+                var data = response.data;
+                def.resolve(data);
+            },
+           function (reponse) {
+               console.dir(reponse);
+               def.reject("Failed to unfollow user");
+           });
+
+        return def.promise;
     }
 
 });

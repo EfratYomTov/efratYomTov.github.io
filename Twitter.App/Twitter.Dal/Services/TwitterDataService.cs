@@ -7,7 +7,7 @@ namespace Twitter.Dal.Services
 {
     public class TwitterDataService : ITwitterDataService
     {
-        public Users CreateUser(string firstName, string lastName, string email, string password)
+        public UserModel CreateUser(string firstName, string lastName, string email, string password)
         {
             using (var context = new TwitterContext())
             {
@@ -23,11 +23,11 @@ namespace Twitter.Dal.Services
                 user = context.Users.Add(user);
                 context.SaveChanges();
 
-                return user;
+                return new UserModel(user);
             }
         }
 
-        public Users EditUser(int userID, string firstName, string lastName, string password)
+        public UserModel EditUser(int userID, string firstName, string lastName, string password)
         {
             using (var context = new TwitterContext())
             {
@@ -41,17 +41,17 @@ namespace Twitter.Dal.Services
                 user.Password = password ?? user.Password;
 
                 context.SaveChanges();
-                return user;
+                return new UserModel(user);
             }
         }
 
-        public Users GetUser(string email, string password)
+        public UserModel GetUser(string email, string password)
         {
             using (var context = new TwitterContext())
             {
                 var user = context.Users.SingleOrDefault(x => x.Email == email && x.Password == password);
 
-                return user;
+                return new UserModel(user);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Twitter.Dal.Services
         {
             using (var context = new TwitterContext())
             {
-                var userFollowed = context.UserFollowed.Where(x => x.UserID == userID).Select(x => x.UserFollowedID);
+                var userFollowed = GetUserFollowed(userID);
 
                 var userFollowedTweets = context.Tweets.Where(x => userFollowed.Contains(x.UserID)).Select(x => new TweetModel
                 {
@@ -143,16 +143,41 @@ namespace Twitter.Dal.Services
             }
         }
 
-        public Users[] GetUsers(string firstName)
+        public UserModel[] GetUsers(int userId, string firstName)
         {
             using (var context = new TwitterContext())
             {
-                var users = context.Users.Where(x => string.IsNullOrEmpty(firstName) || x.FirstName == firstName).ToArray();
+                var userFollowedByMe = GetUserFollowed(userId);
+
+                var users = context.Users.Where(x => string.IsNullOrEmpty(firstName) || x.FirstName == firstName)
+                    .Select(x => new UserModel()
+                    {
+                        ID = x.ID,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        Email = x.Email,
+                        Password = x.Password,
+                        CreatedDate = x.CreatedDate,
+                        IsFollowedByMe = userFollowedByMe.Contains(x.ID)
+                    })
+                    .ToArray();
+
+                
+
+              
 
                 return users;
             }
         }
 
+
+        private int[] GetUserFollowed(int userId)
+        {
+            using (var context = new TwitterContext())
+            {
+                return context.UserFollowed.Where(x => x.UserID == userId).Select(x => x.UserFollowedID).ToArray();
+            }
+        }
 
     }
 }

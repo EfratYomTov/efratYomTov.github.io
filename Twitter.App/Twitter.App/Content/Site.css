@@ -39,3 +39,7 @@ html {
 .margin-10 {
     margin:10px;
 }
+
+.user{
+    border:solid 2px #1da1f2;
+}

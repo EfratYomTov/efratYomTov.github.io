@@ -64,7 +64,7 @@
         $scope.showTweet = false;
         var def = $q.defer();
 
-        homeService.getUsers($scope.searchUserFirstName).then(
+        homeService.getUsers($scope.user.id, $scope.searchUserFirstName).then(
             function (data) {
                 if (data.isSucceeded) {
                     $scope.users = data.users;

@@ -1,9 +1,8 @@
 ﻿<div ng-controller="homeCtrl" class="b-white">
     <div class="col-md-4 col-md-offset-1">
         <div class="userDetails conntent col-md-11">
-            <span>{{user.email}}</span>
-            <br />
-            <span>{{user.firstName }}  {{user.lastName}}</span>
+            <h3>{{user.email}}</h3>
+            <h3>{{user.firstName }}  {{user.lastName}}</h3>
             <div>
                 <button type="button" class="btn btn-default col-md-5 margin-10" ng-click="logout()">logout</button>
                 <button type="button" class="btn btn-success col-md-5 margin-10" ng-click="editUser()">edit user</button>

@@ -10,7 +10,7 @@ namespace Twitter.BL.Services.Interfaces
 
         IResponse EditAccount(int userID, string firstName, string lastName, string password);
 
-        IResponse GetUsers(string firstName);
+        IResponse GetUsers(int userID, string firstName);
 
         IResponse Follow(int userID, int userFollowedID);
 

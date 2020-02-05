@@ -44,9 +44,9 @@ namespace Twitter.App.ApiControllers
 
         [HttpGet]
         [Route("api/twitter/getUsers")]
-        public string GetUsers(string firstName = null)
+        public string GetUsers(int userId, string firstName = null)
         {
-            var users = twitterBlService.GetUsers(firstName);
+            var users = twitterBlService.GetUsers(userId, firstName);
 
             return ToJson(users);
         }

@@ -30,9 +30,9 @@
         return def.promise;
     }
 
-    this.getUsers = function (searchUserFirstName) {
+    this.getUsers = function (userId, searchUserFirstName) {
         var def = $q.defer();
-        $http.get('/api/twitter/getUsers', { params: { firstName: searchUserFirstName } }).then(
+        $http.get('/api/twitter/getUsers', { params: { userId: userId, firstName: searchUserFirstName } }).then(
             function (response) {
                 var data = JSON.parse(response.data);
                 def.resolve(data);

@@ -71,11 +71,11 @@ namespace Twitter.BL.Services
             }
         }
 
-        public IResponse GetUsers(string firstName)
+        public IResponse GetUsers(int userID, string firstName)
         {
             try
             {
-                var users = twitterDataService.GetUsers(firstName);
+                var users = twitterDataService.GetUsers(userID, firstName);
 
                 var convertedUsers = ConversionHelper.ConvertUsers(users);
 
