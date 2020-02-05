@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Twitter.Dal.Models;
 using Twitter.Dal.Services.Interfaces;
 
 namespace Twitter.Dal.Services
@@ -101,24 +102,42 @@ namespace Twitter.Dal.Services
         }
 
 
-        public Tweets[] GetFollowedUsersTweets(int userID)
+        public TweetModel[] GetFollowedUsersTweets(int userID)
         {
             using (var context = new TwitterContext())
             {
                 var userFollowed = context.UserFollowed.Where(x => x.UserID == userID).Select(x => x.UserFollowedID);
 
-                var userFollowedTweets = context.Tweets.Where(x => userFollowed.Contains(x.UserID)).ToArray();
+                var userFollowedTweets = context.Tweets.Where(x => userFollowed.Contains(x.UserID)).Select(x => new TweetModel
+                {
+                    ID = x.ID,
+                    UserID = x.UserID,
+                    UserName = x.Users.FirstName + " " + x.Users.LastName,
+                    Content = x.Content,
+                    DateAdded = x.DateAdded,
+
+                }).ToArray();
 
                 return userFollowedTweets;
 
             }
         }
 
-        public Tweets[] GetOwnTweets(int userID)
+        public TweetModel[] GetOwnTweets(int userID)
         {
             using (var context = new TwitterContext())
             {
-                var tweets = context.Tweets.Where(x => x.UserID == userID).ToArray();
+                var tweets = context.Tweets
+                    .Where(x => x.UserID == userID)
+                    .Select(x => new TweetModel
+                    {
+                        ID = x.ID,
+                        UserID = x.UserID,
+                        UserName = x.Users.FirstName + " " + x.Users.LastName,
+                        Content = x.Content,
+                        DateAdded = x.DateAdded,
+                       
+                    }).ToArray();
 
                 return tweets;
             }
@@ -128,7 +147,7 @@ namespace Twitter.Dal.Services
         {
             using (var context = new TwitterContext())
             {
-                var users = context.Users.Where(x => x.FirstName == firstName).ToArray();
+                var users = context.Users.Where(x => string.IsNullOrEmpty(firstName) || x.FirstName == firstName).ToArray();
 
                 return users;
             }

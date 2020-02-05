@@ -1,4 +1,6 @@
-﻿namespace Twitter.Dal.Services.Interfaces
+﻿using Twitter.Dal.Models;
+
+namespace Twitter.Dal.Services.Interfaces
 {
     public interface ITwitterDataService
     {
@@ -14,10 +16,10 @@
 
         void UnFollow(int userID, int userUnFollowedID);
 
-        Tweets[] GetFollowedUsersTweets(int userID);
+        TweetModel[] GetFollowedUsersTweets(int userID);
 
         Tweets AddTweet(int userID, string content);
 
-        Tweets[] GetOwnTweets(int userID);
+        TweetModel[] GetOwnTweets(int userID);
     }
 }
