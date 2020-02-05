@@ -14,6 +14,7 @@
     }
 
     $scope.getOwnTweets = function () {
+        $scope.showTweet = true;
         var def = $q.defer();
 
         homeService.getOwnTweets($scope.user.id).then(

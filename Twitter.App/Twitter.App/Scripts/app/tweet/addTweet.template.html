@@ -2,6 +2,6 @@
 
     <div class="col-md-11"><textarea ng-model="content" ng-maxlength="80" ng-minlength="1"></textarea></div>
 
-    <div class="col-md-11"><button type="button" ng-click="addTweet()" class="btn btn-primary col-md-5 margin-10">Add a tweet</button></div>
+    <div class="col-md-11"><button type="button" ng-disabled="!content" ng-click="addTweet()" class="btn btn-primary col-md-5 margin-10">Add a tweet</button></div>
 
 </div>
