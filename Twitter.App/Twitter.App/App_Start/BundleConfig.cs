@@ -23,8 +23,10 @@ namespace Twitter.App
                       "~/Scripts/sources/bootstrap/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                 "~/Scripts/sources/angular/1.7.9/angular.js",
-                 "~/Scripts/sources/angular/1.7.9/angular-route.js"));
+                 "~/Scripts/sources/angular/1.7.9/angular.min.js",
+                 "~/Scripts/sources/angular/1.7.9/angular-route.min.js",
+                 "~/Scripts/sources/angular/1.7.9/angular-animate.min.js",
+                 "~/Scripts/sources/angular/1.7.9/angular-loader.min.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/angular/app")

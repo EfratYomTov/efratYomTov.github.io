@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Twitter.BL.Objects;
 using Twitter.Dal;
+using Twitter.Dal.Models;
 
 namespace Twitter.BL.Helpers
 {
@@ -13,7 +14,7 @@ namespace Twitter.BL.Helpers
         {
             return new User
             {
-                ID = user.ID,
+                Id = user.ID,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
@@ -38,23 +39,25 @@ namespace Twitter.BL.Helpers
         }
 
         /// <summary>
-        /// Convert tweet from type Twitter.Dal.Tweets to Twitter.BL.Objects.Tweet
+        /// Convert tweet from type Twitter.Dal.Tweets to Twitter.BL.Objects.TweetModel
         /// </summary>
-        internal static Tweet ConvertTweet(Tweets tweet)
+        internal static Tweet ConvertTweet(TweetModel tweet)
         {
             return new Tweet
             {
                 ID = tweet.ID,
                 UserID = tweet.UserID,
+                UserName = tweet.UserName,
                 Content = tweet.Content,
-                DateAdded = tweet.DateAdded
+                DateAdded = tweet.DateAdded,
+                ShortDateString = tweet.DateAdded.ToShortDateString()
             };
         }
 
         /// <summary>
-        /// Convert tweets from type Twitter.Dal.Tweets to Twitter.BL.Objects.Tweet
+        /// Convert tweets from type Twitter.Dal.Tweets to Twitter.BL.Objects.TweetModel
         /// </summary>
-        internal static Tweet[] ConvertTweets(Tweets[] tweets)
+        internal static Tweet[] ConvertTweets(TweetModel[] tweets)
         {
             var convertedTweets = new List<Tweet>();
 

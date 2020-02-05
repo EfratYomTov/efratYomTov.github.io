@@ -15,21 +15,6 @@ namespace Twitter.App.ApiControllers
             twitterBlService = new TwitterBlService();
         }
 
-
-        [Route("api/twitter/testGet")]
-        [HttpGet]
-        public string testGet(string email, string password)
-        {
-            return ToJson(new { IsSucceeded = true });
-        }
-
-        [Route("api/twitter/testpost")]
-        [HttpPost]
-        public string testpost([FromBody]LoginModel request)
-        {
-            return ToJson(new { IsSucceeded = true });
-        }
-
         [Route("api/twitter/login")]
         [HttpPost]
         public string Login([FromBody]LoginModel request)
@@ -38,16 +23,6 @@ namespace Twitter.App.ApiControllers
 
             return ToJson(accountResponse);
         }
-
-
-        [Route("api/twitter/logout")]
-        public IHttpActionResult Logout()
-        {
-            //Do somesing
-            return Ok();
-        }
-
-
 
         [HttpPost]
         [Route("api/twitter/createAccount")]
@@ -62,14 +37,14 @@ namespace Twitter.App.ApiControllers
         [Route("api/twitter/editAccount")]
         public string EditAccount([FromBody]EditAccountModel request)
         {
-            var accountResponse = twitterBlService.EditAccount(request.UserID, request.FirstName, request.LastName, request.Password);
+            var accountResponse = twitterBlService.EditAccount(request.Id, request.FirstName, request.LastName, request.Password);
 
             return ToJson(accountResponse);
         }
 
         [HttpGet]
         [Route("api/twitter/getUsers")]
-        public string GetUsers(string firstName)
+        public string GetUsers(string firstName = null)
         {
             var users = twitterBlService.GetUsers(firstName);
 

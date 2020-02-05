@@ -1,3 +1,4 @@
-﻿app.controller('twitterAppCtrl', function ($scope) {
+﻿app.controller('twitterAppCtrl', ['$scope', function ($scope) {
 
-});
+   
+}]);

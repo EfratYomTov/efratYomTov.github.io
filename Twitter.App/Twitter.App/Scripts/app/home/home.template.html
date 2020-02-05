@@ -1,0 +1,57 @@
+﻿<div ng-controller="homeCtrl" class="b-white">
+    <div class="col-md-4 col-md-offset-1">
+        <div class="userDetails conntent col-md-11">
+            <span>{{user.email}}</span>
+            <br />
+            <span>{{user.firstName }}  {{user.lastName}}</span>
+            <div>
+                <button type="button" class="btn btn-default col-md-5 margin-10" ng-click="logout()">logout</button>
+                <button type="button" class="btn btn-success col-md-5 margin-10" ng-click="editUser()">edit user</button>
+            </div>
+
+        </div>
+        <div class="conntent col-md-11 margin-10">
+            <div class="row">
+                <div>
+                    <add-tweet user-id="user.id"></add-tweet>
+                </div>
+
+            </div>
+        </div>
+        <div class="userAction conntent col-md-11 margin-10">
+            <div class="row">
+                <button type="button" class="btn btn-primary col-md-10 margin-10" ng-click="getOwnTweets()">See own tweets </button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary col-md-10 margin-10" ng-click="getFollowedUsersTweets()">See followed users tweets </button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary col-md-10 margin-10" ng-click="getUsers()">See users</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 b-white">
+        <div ng-show="tweets && showTweet">
+            <div ng-repeat="tweet in tweets ">
+                <tweet tweet="tweet"></tweet>
+            </div>
+        </div>
+
+        <div ng-show="users && !showTweet">
+            <div class="row margin-10">
+                <div class="col-md-7">
+                    <input type="text" name="searchUserFirstName" class="form-control" ng-model="searchUserFirstName" title="enter first name to search..." />
+                </div>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-default" ng-click="getUsers()">Search</button>
+                </div>
+            </div>
+            <div>
+                <div ng-repeat="item in users ">
+                    <user current-user-id="user.id" user="item"></user>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: #1da1f2;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -11,7 +12,30 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
+}
+
+html {
+    background: #1da1f2;
+}
+
+.conntent {
+    background: white;
+    border-radius: 5px;
+    padding-bottom: 25px;
+}
+
+.userDetails {
+    padding-top:15px;
+     margin:10px;
+
+}
+
+.b-white {
+    background: white;
+}
+
+.margin-10 {
+    margin:10px;
 }
